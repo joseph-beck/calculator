@@ -1,0 +1,9 @@
+# hidden folders
+.settings
+
+# folders
+target
+bin
+
+# hidden files
+.checkstyle

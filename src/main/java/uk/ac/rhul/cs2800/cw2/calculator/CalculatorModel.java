@@ -1,0 +1,35 @@
+package uk.ac.rhul.cs2800.cw2.calculator;
+
+import uk.ac.rhul.cs2800.cw2.exception.InvalidExpression;
+
+/**
+ * Evaluates an expression - the evaluation can be Standard (infix) or reverse polish.
+ */
+public class CalculatorModel implements CalculatorInterface {
+
+  /**
+   * Does an actual calculation to evaluate a given expression. The calculation depends on the value
+   * of the infix parameter which can be True to indicate that an INFIX expression with brackets is
+   * to be evaluated, like standard arithmetic. If the infix parameter is FALSE then the calculator
+   * treats the expression as a reverse polish expression and does the calculation. In either case a
+   * badly formed expression is notified to the caller by throwing an exception.
+   * 
+   * @param expression the question to be answered
+   * @param infix how to evaluate the question: true means infix, false means reverse polish
+   * @return the calculated value
+   * @throws InvalidExpression when the expression cannot be evaluated
+   */
+  @Override
+  public float evaluate(String expression, Boolean infix) throws InvalidExpression {
+    EvaluationInterface evaluator;
+    
+    if (infix) {
+      evaluator = new StandardCalculator();
+      return evaluator.evaluate(expression);
+    }
+    
+    evaluator = new ReversePolishCalculator();
+    return evaluator.evaluate(expression);
+  }
+
+}
